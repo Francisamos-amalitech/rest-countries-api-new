@@ -1,0 +1,103 @@
+ /* Set the text color to black in light mode */
+ .light-theme .country-info {
+    color: black;
+
+  }
+
+  .light-theme h3{
+    color:#000;
+  }
+
+
+
+.country{
+    padding:50px;
+}
+
+.btn-light{
+    margin-bottom:30px;
+    display:inline-block;
+}
+
+.country article .country-info div{
+    margin:30px 0;
+}
+
+.country article .country-info div h2{
+    font-size:30px;
+    letter-spacing:1px;
+}
+
+.country article .country-info div h5{
+    font-weight:600;
+    margin:10px 0;
+    font-size:18px;
+}
+
+.country article .country-info div h5 span{
+    font-weight: 300;
+}
+
+
+.country article  div h3{
+      font-weight:600;
+}
+
+.country article  .borders{
+   display:flex;
+   flex-wrap:wrap;
+}
+
+.country article  .borders ul{
+        list-style:none;
+        margin:10px;
+        background-color:var(--article-color);
+        padding:5px 15px;
+        border-radius:3px;
+        box-shadow:0 5px 20px (200, 15%, 8%, 0.5);
+}
+
+
+
+@media(min-width:992px){
+   .country article .country-container{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+   }
+
+   .country .country-info{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+   }
+
+ .country article img{
+    width:500px;
+   } 
+
+
+}
+
+
+@media(min-width:1200px){
+    .country{
+        max-width:1100px;
+        margin:auto;
+    }
+}
+
+@media(min-width:1366px){
+    .country{
+        max-width:1200px;
+       
+    }
+}
+
+
+@media(min-width:1440px){
+    .country{
+        max-width:1400px;
+       
+        
+    }
+}
