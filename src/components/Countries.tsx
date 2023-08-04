@@ -31,6 +31,7 @@ const Countries: React.FC = () => {
     fetchCountryData();
   }, []);
 
+  
   const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };

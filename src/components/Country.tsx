@@ -33,6 +33,8 @@ const Country: React.FC = () => {
     };
 
     fetchCountryData();
+   
+   
   }, [name]);
 
   return (
