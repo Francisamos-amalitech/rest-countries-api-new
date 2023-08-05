@@ -6,13 +6,18 @@ import Country from './components/Country';
 
 function App(): JSX.Element {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Countries />} />
-        <Route path="/countries/:name" element={<Country />} />
-      </Routes>
-    </Router>
+   <>
+    <Header />
+    <Countries />
+   
+   </>
+    // <Router>
+    //   <Header />
+    //   <Routes>
+    //     <Route path="/" element={<Countries />} />
+    //     <Route path="/countries/:name" element={<Country />} />
+    //   </Routes>
+    // </Router>
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 interface Country {
   numericCode: string;
@@ -19,13 +19,10 @@ const Countries: React.FC = () => {
 
   useEffect(() => {
     const fetchCountryData = async () => {
-      try {
         const response = await fetch(url);
-        const countriesData: Country[] = await response.json();
+        const countriesData = await response.json();
         setCountries(countriesData);
-      } catch (error) {
-        console.error("Error fetching country data:", error);
-      }
+     
     };
 
     fetchCountryData();
@@ -97,9 +94,9 @@ const Countries: React.FC = () => {
                   <h4>
                     Capital: <span>{capital}</span>
                   </h4>
-                  <Link to={`/countries/${name}`} className="learn-more">
+                  {/* <Link to={`/countries/${name}`} className="learn-more">
                     Learn More
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </article>
