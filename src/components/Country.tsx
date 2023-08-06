@@ -38,7 +38,7 @@ const Country: React.FC = () => {
 
  // Handle back button click
  const handleBackButtonClick = () => {
-  navigate('/rest-countries-api-new'); // Use navigate instead of history.goBack()
+  navigate('/rest-countries-api-new'); 
 };
 
   return (
