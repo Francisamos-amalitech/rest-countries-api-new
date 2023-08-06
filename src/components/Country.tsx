@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import '../country.css';
 
 interface CountryData {
@@ -20,6 +20,7 @@ interface CountryData {
 const Country: React.FC = () => {
   const [country, setCountry] = useState<CountryData[]>([]);
   const { name } = useParams<{ name: string }>();
+  const navigate = useNavigate(); // Initialize useNavigate
    console.log(name)
 
   useEffect(() => {
@@ -34,12 +35,18 @@ const Country: React.FC = () => {
    
   }, [name]);
 
+
+ // Handle back button click
+ const handleBackButtonClick = () => {
+  navigate('/rest-countries-api-new'); // Use navigate instead of history.goBack()
+};
+
   return (
     <>
       <section className="country">
-      <Link to="/" className="btn btn-light">
+      <button className="btn btn-light" onClick={handleBackButtonClick}>
           <i className="fas fa-arrow-left"></i> Back Home
-        </Link>
+        </button>
         {country.map((single) => {
           const {
             numericCode,
