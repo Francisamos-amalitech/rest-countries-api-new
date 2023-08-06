@@ -20,16 +20,13 @@ interface CountryData {
 const Country: React.FC = () => {
   const [country, setCountry] = useState<CountryData[]>([]);
   const { name } = useParams<{ name: string }>();
+   console.log(name)
 
   useEffect(() => {
     const fetchCountryData = async () => {
-      try {
         const response = await fetch(`https://restcountries.com/v2/name/${name}`);
         const countryData: CountryData[] = await response.json();
         setCountry(countryData);
-      } catch (error) {
-        console.error('Error fetching country data:', error);
-      }
     };
 
     fetchCountryData();

@@ -19,15 +19,21 @@ const Countries: React.FC = () => {
 
   useEffect(() => {
     const fetchCountryData = async () => {
+      try {
         const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
         const countriesData = await response.json();
+        console.log(countriesData); // Check the fetched data in the console
         setCountries(countriesData);
-     
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-
+  
     fetchCountryData();
   }, []);
-
   
   const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
