@@ -37,7 +37,7 @@ const Country: React.FC = () => {
   return (
     <>
       <section className="country">
-        <Link to="/" className="btn btn-light">
+      <Link to="/" className="btn btn-light">
           <i className="fas fa-arrow-left"></i> Back Home
         </Link>
         {country.map((single) => {
