@@ -1,6 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 
-
 interface Country {
   numericCode: string;
   name: string;
@@ -31,10 +30,10 @@ const Countries: React.FC = () => {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchCountryData();
   }, []);
-  
+
   const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
@@ -55,16 +54,20 @@ const Countries: React.FC = () => {
     <>
       <section className="filter">
         <form className="form-control">
-        <i className="search-icon fas fa-search"></i>
-          <input
-            type="search"
-            name="search"
-            id="search"
-            placeholder="Search for a country..."
-            value={searchQuery}
-            onChange={handleSearchInputChange}
-          />
-    
+          <label htmlFor="search" className="search-label">
+            <i
+              className="search-icon fas fa-search"
+              onClick={() => document.getElementById("search")?.focus()}
+            ></i>
+            <input
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search for a country..."
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+            />
+          </label>
         </form>
         <div className="region-filter">
           <select
@@ -86,7 +89,8 @@ const Countries: React.FC = () => {
 
       <section className="grid">
         {filteredCountries.map((country) => {
-          const { numericCode, name, population, region, capital, flag } = country;
+          const { numericCode, name, population, region, capital, flag } =
+            country;
           return (
             <article key={numericCode}>
               <div>
@@ -102,7 +106,6 @@ const Countries: React.FC = () => {
                   <h4>
                     Capital: <span>{capital}</span>
                   </h4>
-             
                 </div>
               </div>
             </article>

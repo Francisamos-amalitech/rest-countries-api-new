@@ -37,7 +37,7 @@ body{
 
 
 body.light-theme{
-  background:#dfdfdf;
+  background:#f1f1f1;
   color:var(--light-mode-text-color);
 }
 
@@ -63,22 +63,18 @@ img{
 
 /* FILTER */
 
-.input{
-  background: transparent;
-}
-
 .filter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
 }
 
 .form-control {
   position: relative;
   display: flex;
   align-items: center;
-
   border-radius: 5px;
   padding: 0.5rem;
   background:#2b3743;
@@ -91,25 +87,28 @@ img{
 }
 
 #search {
+  flex: 1; /* Allow the input to take up remaining space */
   border: none;
   outline: none;
-  flex-grow: 1;
-  padding: 0.25rem;
+  font-size: 14px;
 }
+
+
 
 
 .filter .form-control{
   width: 100%;
+ 
 }
 
 .filter .form-control input{
-  width:100%;
+    width:100%;
     background:#2b3743;
     border:none; 
     margin:0 0 30px;
     border-radius:5px;
     outline:none;
-    padding:12px;
+    padding:10px;
     color:#fff;
 }
 
@@ -117,7 +116,6 @@ img{
     color:#fff;
     font-family:inherit;
     letter-spacing:0.5px;
-  
 }
 
 
@@ -131,6 +129,8 @@ img{
    border:none;
    border-right:15px solid #2b3743;
    border-radius:5px;
+  
+   
 }
 
 /* END OF FILTER */
@@ -164,17 +164,6 @@ img{
 
 
 
-.learn-more{
-  background-color:var(--dark-bg-color);
-  color:#fff;
-  text-decoration:none;
-  padding:10px 20px;
-  font-size:15px;
-  display:inline-block;
-  margin:14px 0;
-}
-
-
 /* ----END OF COUNTRY STYLING----- */
 
 
@@ -191,8 +180,8 @@ img{
 }
 
 .grid article {
-  box-shadow: 0 10px 10px rgb(9, 17, 22, 0.5);
-  aspect-ratio: 16/9;
+  box-shadow: 0 0px 10px rgb(0, 0, 0, 0.5);
+  border-radius:5px;
 }
 
 
@@ -238,10 +227,11 @@ img{
 
 /* Styles for light mode */
 .light-theme .grid {
-  /* Add your styles for the grid container in light mode here */
-  background-color: #dfdfdf; /* Set the background color to white in light mode */
-  /* ... */
-  
+  background-color: #f1f1f1; 
+}
+
+.light-theme .filter{
+  background-color:#f1f1f1;
 }
 
 
@@ -255,24 +245,39 @@ img{
 
 
 .light-theme .grid .details {
-  /* Add your styles for the text elements in light mode here */
   color: #000; 
-  background:#fff;
-  /* Set the 
-  text color to black in light mode */
-  /* ... */
 
-
-  
 }
 
 
+.light-theme .form-control{
+  background-color: #fff;
+}
+
+.light-theme .filter .form-control input{
+    background:#fff;
+    color:#000;
+   
+}
+
+.light-theme .filter .form-control input::placeholder{
+    color:#000;
+   
+}
 
 
+.light-theme .header{
+  background: #fff;
+  color:#000;
+  box-shadow:0px 0px 10px rgba(0, 0, 0, 0.2);
+}
 
 
-
-
+.light-theme .filter .region-filter .select{
+  background: #fff;
+  color: #000;
+  border-right:15px solid #fff;
+}
 
 /* END OF GRID LAYOUT STYLING */
 
@@ -335,6 +340,18 @@ img{
     width:100%;
     height:30vh;
   }
+
+
+  .filter .form-control input{
+    width:400px;
+    height:auto;
+  }
+ 
+  
+  .filter .form-control input::placeholder{
+      background:none;
+  }
+  
 
 
 }
