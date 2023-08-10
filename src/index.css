@@ -31,8 +31,8 @@ body{
   /* padding:20px; */
   color:#fff;
   transition:background 0.4s;
-
-  
+  overflow:hidden;
+  overflow-y: scroll;
 }
 
 
@@ -63,13 +63,40 @@ img{
 
 /* FILTER */
 
-.filter{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:20px;
+.input{
+  background: transparent;
 }
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.form-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  border-radius: 5px;
+  padding: 0.5rem;
+  background:#2b3743;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+  color: #777;
+  margin-right: 0.5rem;
+}
+
+#search {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 0.25rem;
+}
+
 
 .filter .form-control{
   width: 100%;
@@ -90,6 +117,7 @@ img{
     color:#fff;
     font-family:inherit;
     letter-spacing:0.5px;
+  
 }
 
 
@@ -109,6 +137,7 @@ img{
 
 
 /* ----COUNTRY STYLING----- */
+
 .btn{
    background:var(--dark-bg-color);
    padding:5px;
@@ -154,29 +183,38 @@ img{
 
 
 /* GRID LAYOUT STYLING */
-.grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:40px;
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding: 20px;
+}
+
+.grid article {
+  box-shadow: 0 10px 10px rgb(9, 17, 22, 0.5);
+  aspect-ratio: 16/9;
+}
+
+
+.grid .card-content {
+  display: flex;
+  flex-direction: column;
+  background: #2b3743;
+  border-radius: 5px;
+  height: 100%; /* Ensure the content fills the entire card */
+}
+
+.grid article img {
+  border-radius: 5px 5px 0 0;
+  object-fit: cover;
+  width:100%;
+  height: 50%;
+}
+
+.grid .details {
   padding:20px;
-}
-
-/* .grid article{
-   box-shadow: 0 10px 10px rgb(9, 17, 22, 0.5); 
-}
-
- */
-
-
-.grid .details{
-  background:#2b3743;
-  padding:40px 20px;
-  margin-top:-20px;
-  border-radius:0 0 5px 5px;
-}
-
-.grid article  img{
-    border-radius:5px 5px 0 0;
+  height: 50%;
+  color: white;
 }
 
 
@@ -284,6 +322,19 @@ img{
  
    .grid{
     grid-template-columns:repeat(4, 1fr);
-    gap:60px;
+    gap:40px;
    }
+
+   .grid article img {
+    width:600px;
+    height:120px;
+    object-fit:cover;
+  }
+
+  .grid .details{
+    width:100%;
+    height:30vh;
+  }
+
+
 }

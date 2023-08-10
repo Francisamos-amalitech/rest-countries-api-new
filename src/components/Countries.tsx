@@ -55,6 +55,7 @@ const Countries: React.FC = () => {
     <>
       <section className="filter">
         <form className="form-control">
+        <i className="search-icon fas fa-search"></i>
           <input
             type="search"
             name="search"
@@ -63,6 +64,7 @@ const Countries: React.FC = () => {
             value={searchQuery}
             onChange={handleSearchInputChange}
           />
+    
         </form>
         <div className="region-filter">
           <select
