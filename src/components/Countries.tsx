@@ -54,7 +54,6 @@ const Countries: React.FC = () => {
     <>
       <section className="filter">
         <form className="form-control">
-          <label htmlFor="search" className="search-label">
             <i
               className="search-icon fas fa-search"
               onClick={() => document.getElementById("search")?.focus()}
@@ -67,7 +66,7 @@ const Countries: React.FC = () => {
               value={searchQuery}
               onChange={handleSearchInputChange}
             />
-          </label>
+          
         </form>
         <div className="region-filter">
           <select

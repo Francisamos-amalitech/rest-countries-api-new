@@ -58,6 +58,11 @@ img{
   background:#2b3743;
   padding:10px 20px;
 }
+
+
+.header h1{
+  font-size:18px;
+}
 /* END OF HEADER STYLING */
 
 
@@ -69,6 +74,7 @@ img{
   flex-direction:column;
   align-items:center;
   padding:20px;
+  
 }
 
 .form-control {
@@ -94,18 +100,16 @@ img{
 }
 
 
-
-
 .filter .form-control{
   width: 100%;
- 
+  display:flex;
 }
 
 .filter .form-control input{
     width:100%;
     background:#2b3743;
     border:none; 
-    margin:0 0 30px;
+    margin:0 0px;
     border-radius:5px;
     outline:none;
     padding:10px;
@@ -118,7 +122,10 @@ img{
     letter-spacing:0.5px;
 }
 
-
+.filter .region-filter{
+  margin-top:30px;
+  
+}
 
 .filter .region-filter .select{
    background:#2b3743;
