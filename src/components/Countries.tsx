@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+
 
 interface Country {
   numericCode: string;
@@ -59,7 +59,7 @@ const Countries: React.FC = () => {
             type="search"
             name="search"
             id="search"
-            placeholder="Search for a country"
+            placeholder="Search for a country..."
             value={searchQuery}
             onChange={handleSearchInputChange}
           />
@@ -100,9 +100,7 @@ const Countries: React.FC = () => {
                   <h4>
                     Capital: <span>{capital}</span>
                   </h4>
-                  <Link to={`/countries/${name}`} className="learn-more">
-                    Learn More
-                  </Link>
+             
                 </div>
               </div>
             </article>

@@ -45,7 +45,7 @@ const Country: React.FC = () => {
     <>
       <section className="country">
       <button className="btn btn-light" onClick={handleBackButtonClick}>
-          <i className="fas fa-arrow-left"></i> Back Home
+          <i className="fas fa-arrow-left"></i> Back
         </button>
         {country.map((single) => {
           const {
