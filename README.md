@@ -1,46 +1,106 @@
-# Getting Started with Create React App
+React Countries App
+This is a simple React application that utilizes the REST Countries API to display information about different countries. It allows users to browse a list of countries and view detailed information about each country.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Usage
+After installing the dependencies, run npm start to start the development server.
+Open your web browser and navigate to http://localhost:3000 to access the app.
+The home page displays a list of countries. Click on a country to view its detailed information.
 
-## Available Scripts
+Features
+View a list of countries with basic information (name, flag, population, region, and capital).
+View detailed information about a specific country, including languages, currencies, borders, and more.
+Search for a specific country using the search bar on the homepage.
 
-In the project directory, you can run:
+Components
+The app is organized into the following components:
 
-### `npm start`
+Header: Renders the navigation header at the top of the page.
+Countries: Displays a list of countries with basic information.
+Country: Displays detailed information about a specific country.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Routes
+/rest-countries-api-new: This is the homepage that lists all the countries.
+/countries/:name: This route displays detailed information about the country with the specified name.
 
-### `npm test`
+Technologies Used
+React: A JavaScript library for building user interfaces.
+TypeScript: To check errors in the code
+React Router: Used for handling client-side routing.
+REST Countries API: Provides country data for the app.
+HTML/CSS: Markup and styles for the app.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+React Countries App - Countries Component
+This is the Countries component of a React application that uses the REST Countries API to display information about different countries. It allows users to browse a list of countries, search for specific countries, and filter countries by region.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Component Structure
+The Countries component is a functional component that utilizes React hooks to manage state and fetch data from the API. It consists of the following parts:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+State Hooks:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+countries: Stores an array of Country objects fetched from the API.
+searchQuery: Holds the current search query entered by the user in the search input.
+regionFilter: Keeps track of the selected region filter from the dropdown.
+useEffect Hook:
 
-### `npm run eject`
+Fetches country data from the REST Countries API when the component mounts and sets the countries state with the fetched data.
+Event Handlers:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+handleSearchInputChange: Updates the searchQuery state when the user types in the search input.
+handleRegionFilterChange: Updates the regionFilter state when the user selects a region from the dropdown.
+Filtered Countries:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Filters the countries array based on the current searchQuery and regionFilter.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Functionality
+The component fetches country data from the API when it mounts and stores the data in the countries state.
+Users can search for a specific country using the search input. The list of countries will be filtered based on the search query in real-time.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Users can also filter countries by region using the dropdown menu. Selecting a region from the dropdown will update the list of displayed countries accordingly.
+Each country is displayed as an article in a grid format, showing the country's flag, name, population, region, capital, and a "Learn More" link to view detailed information about the country.
+Usage
+To use this component in your React application:
 
-## Learn More
+Make sure you have the required dependencies installed, especially react-router-dom for routing.
+Import the Countries component into your main application file.
+Place the Countries component inside the <Routes> component to define the route where you want to display the countries.
+The component will fetch the data from the REST Countries API automatically when it mounts.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+React Countries App - Country Component
+This is the Country component of a React application that uses the REST Countries API to display detailed information about a specific country. It allows users to view information such as the country's flag, native name, population, region, subregion, capital, top-level domain, currencies, languages, and bordering countries.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Component Structure
+The Country component is a functional component that utilizes React hooks to manage state and fetch data from the API. It consists of the following parts:
+
+State Hooks:
+
+country: Stores an array of CountryData objects fetched from the API based on the name parameter in the URL.
+Params Hook:
+
+useParams: Extracts the name parameter from the URL to determine the specific country to fetch data for.
+Navigate Hook:
+
+useNavigate: Provides the navigate function to programmatically navigate back to the homepage.
+useEffect Hook:
+
+Fetches country data from the REST Countries API when the component mounts and updates the country state with the fetched data.
+The useEffect hook also has a dependency on the name parameter, so it will refetch data whenever the name parameter changes in the URL.
+Back Button Click Handler:
+
+handleBackButtonClick: A function that uses the navigate function to navigate back to the homepage when the "Back Home" button is clicked.
+
+Functionality
+The component fetches detailed country data from the REST Countries API based on the name parameter in the URL when it mounts.
+The data includes information about the country's flag, native name, population, region, subregion, capital, top-level domain, currencies, languages, and bordering countries.
+The "Back Home" button allows users to navigate back to the homepage to view the list of countries.
+The component displays the fetched country information in a formatted layout, including the country's flag and other details.
+If the country has bordering countries, they will be displayed in a list below the country's details.
+
+Usage
+To use this component in your React application:
+
+Make sure you have the required dependencies installed, especially react-router-dom for routing.
+Import the Country component into your main application file.
+Place the Country component inside the <Routes> component to define the route where you want to display detailed country information.
+The component will fetch the country data from the REST Countries API automatically when it mounts, based on the name parameter in the URL.
