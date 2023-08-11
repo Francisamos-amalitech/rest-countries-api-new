@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-
+import { Link } from 'react-router-dom';
 interface Country {
   numericCode: string;
   name: string;
@@ -90,24 +90,28 @@ const Countries: React.FC = () => {
         {filteredCountries.map((country) => {
           const { numericCode, name, population, region, capital, flag } =
             country;
+          
           return (
-            <article key={numericCode}>
-              <div>
-                <img src={flag} alt={name} />
-                <div className="details">
-                  <h3>{name}</h3>
-                  <h4>
-                    Population: <span>{population}</span>
-                  </h4>
-                  <h4>
-                    Region: <span>{region}</span>
-                  </h4>
-                  <h4>
-                    Capital: <span>{capital}</span>
-                  </h4>
-                </div>
-              </div>
-            </article>
+            <Link to={`/countries/${name}`} key={numericCode}>
+          <article key={numericCode}>
+<div>
+  <img src={flag} alt={name} />
+  <div className="details">
+    <h3>{name}</h3>
+    <h4>
+      Population: <span>{population}</span>
+    </h4>
+    <h4>
+      Region: <span>{region}</span>
+    </h4>
+    <h4>
+      Capital: <span>{capital}</span>
+    </h4>
+  </div>
+</div>
+</article>
+          </Link>
+           
           );
         })}
       </section>
@@ -116,3 +120,5 @@ const Countries: React.FC = () => {
 };
 
 export default Countries;
+
+

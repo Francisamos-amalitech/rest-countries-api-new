@@ -6,6 +6,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
+  text-decoration:none;
 } 
 
 
@@ -243,17 +244,15 @@ img{
 
 
 
+
 /* Default styles for both dark and light mode */
 .grid .details {
-  /* Add your styles for the text elements here */
   color: white;
-  /* ... */
 }
 
 
 .light-theme .grid .details {
   color: #000; 
-
 }
 
 
@@ -359,6 +358,5 @@ img{
       background:none;
   }
   
-
 
 }

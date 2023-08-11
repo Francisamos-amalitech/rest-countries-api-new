@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../country.css';
 
 interface CountryData {
@@ -18,59 +18,68 @@ interface CountryData {
 }
 
 const Country: React.FC = () => {
-  const [country, setCountry] = useState<CountryData[]>([]);
+  const [country, setCountry] = useState<CountryData | null>(null);
+  const [borderNames, setBorderNames] = useState<string[]>([]);
+  const navigate = useNavigate();
   const { name } = useParams<{ name: string }>();
-  const navigate = useNavigate(); // Initialize useNavigate
-   console.log(name)
 
   useEffect(() => {
     const fetchCountryData = async () => {
-        const response = await fetch(`https://restcountries.com/v2/name/${name}`);
-        const countryData: CountryData[] = await response.json();
-        setCountry(countryData);
+      const response = await fetch(`https://restcountries.com/v2/name/${name}`);
+      const countryData: CountryData[] = await response.json();
+      const countryInfo = countryData[0];
+      setCountry(countryInfo);
+      
+      if (countryInfo) {
+        const borderCountryNames = await Promise.all(
+          countryInfo.borders.map(async (border) => {
+            const response = await fetch(`https://restcountries.com/v2/alpha/${border}`);
+            const borderData = await response.json();
+            return borderData.name;
+          })
+        );
+        setBorderNames(borderCountryNames);
+      }
     };
 
     fetchCountryData();
-   
-   
   }, [name]);
 
+  // Handle back button click
+  const handleBackButtonClick = () => {
+    navigate('/rest-countries-api-new'); 
+  };
 
- // Handle back button click
- const handleBackButtonClick = () => {
-  navigate('/rest-countries-api-new'); 
-};
+  if (!country) {
+    return null; // You can replace this with a loading indicator or message
+  }
+
+  const {
+    flag,
+    name: countryName,
+    nativeName,
+    population,
+    region,
+    subregion,
+    capital,
+    topLevelDomain,
+    currencies,
+    languages,
+  } = country;
 
   return (
     <>
       <section className="country">
-      <button className="btn btn-light" onClick={handleBackButtonClick}>
+        <button className="btn btn-light" onClick={handleBackButtonClick}>
           <i className="fas fa-arrow-left"></i> Back
         </button>
-        {country.map((single) => {
-          const {
-            numericCode,
-            flag,
-            name,
-            nativeName,
-            population,
-            region,
-            subregion,
-            capital,
-            topLevelDomain,
-            currencies,
-            languages,
-            borders,
-          } = single;
-
-          return (
-            <article key={numericCode}>
-              <div className="country-container">
-                <div className="flag">
-                  <img src={flag} alt={name} />
-                </div>
-                <div className="country-info">
-                  <div>
+        <article>
+          <div className="country-container">
+            <div className="flag">
+              <img src={flag} alt={countryName} />
+            </div>
+            <div className="country-info">
+            <div>
                     <h2 className="country-name">{name}</h2>
                     <h5>
                       Native Name: <span>{nativeName}</span>
@@ -102,21 +111,17 @@ const Country: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div>
-                <h3>Border Countries :</h3>
-                <div className="borders">
-                  {borders.map((border) => {
-                    return (
-                      <ul key={border}>
-                        <li>{border}</li>
-                      </ul>
-                    );
-                  })}
-                </div>
-              </div>
-            </article>
-          );
-        })}
+          <div>
+            <h3>Border Countries:</h3>
+            <div className="borders">
+              {borderNames.map((borderName) => (
+                <ul key={borderName}>
+                  <li>{borderName}</li>
+                </ul>
+              ))}
+            </div>
+          </div>
+        </article>
       </section>
     </>
   );
