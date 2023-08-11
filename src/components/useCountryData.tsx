@@ -1,4 +1,3 @@
-// useCountryData.ts
 import { useState, useEffect } from "react";
 
 interface Country {
