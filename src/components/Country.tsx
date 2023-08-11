@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../country.css';
+import useCountryData from "./useCountryData";
+
 
 interface CountryData {
   numericCode: string;
@@ -18,6 +20,7 @@ interface CountryData {
 }
 
 const Country: React.FC = () => {
+  const { countries, loading, error } = useCountryData("https://restcountries.com/v2/all");
   const [country, setCountry] = useState<CountryData | null>(null);
   const [borderNames, setBorderNames] = useState<string[]>([]);
   const navigate = useNavigate();

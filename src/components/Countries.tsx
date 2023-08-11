@@ -1,5 +1,7 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Link } from 'react-router-dom';
+import useCountryData from "./useCountryData";
+
 interface Country {
   numericCode: string;
   name: string;
@@ -9,30 +11,10 @@ interface Country {
   flag: string;
 }
 
-const url = "https://restcountries.com/v2/all";
-
 const Countries: React.FC = () => {
-  const [countries, setCountries] = useState<Country[]>([]);
+  const { countries, loading, error } = useCountryData("https://restcountries.com/v2/all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [regionFilter, setRegionFilter] = useState<string>("All");
-
-  useEffect(() => {
-    const fetchCountryData = async () => {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const countriesData = await response.json();
-        console.log(countriesData); // Check the fetched data in the console
-        setCountries(countriesData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchCountryData();
-  }, []);
 
   const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -49,6 +31,15 @@ const Countries: React.FC = () => {
       regionFilter === "All" || country.region === regionFilter;
     return nameMatch && regionMatch;
   });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
 
   return (
     <>
