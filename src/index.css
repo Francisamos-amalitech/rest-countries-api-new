@@ -62,8 +62,16 @@ img{
 
 
 .header h1{
-  font-size:18px;
+  font-size:24px;
+  font-weight:900;
 }
+
+.header .darkmode{
+  font-size:16px;
+}
+
+
+
 /* END OF HEADER STYLING */
 
 
@@ -124,7 +132,7 @@ img{
 }
 
 .filter .region-filter{
-  margin-top:30px;
+  margin-top:20px;
   
 }
 
@@ -217,8 +225,8 @@ img{
 
 .grid .details h3{
   padding-bottom:10px;
-  font-size:15px;
-  font-weight:bold;
+  font-size:18px;
+  font-weight:900;
 }
 
 
@@ -229,8 +237,10 @@ img{
 
 
 .grid .details h4 span{
-  font-weight:300;
+  font-weight:400;
 }
+
+
 
 
 
@@ -331,8 +341,8 @@ img{
 
 @media(min-width:992px){
       .header, .filter, .grid{
-          padding:20px 100px;
-      }
+         padding:30px  5%;    
+         }
  
    .grid{
     grid-template-columns:repeat(4, 1fr);
@@ -340,15 +350,16 @@ img{
    }
 
    .grid article img {
-    width:600px;
-    height:120px;
-    object-fit:cover;
+    width:100%;
+    max-width:600px;
+    height:28vh;
+
   }
 
-  .grid .details{
+  /* .grid .details{
     width:100%;
     height:30vh;
-  }
+  } */
 
 
   .filter .form-control input{

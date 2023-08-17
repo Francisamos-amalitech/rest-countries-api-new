@@ -9,15 +9,19 @@
   }
 
 
-
-
 .country{
-    padding:50px;
+    padding:100px 0;
 }
 
 .btn-light{
+    width:120px;
+    padding:10px 0;
     margin-bottom:30px;
     display:inline-block;
+}
+
+.fa-arrow-left{
+    margin-right:5px;
 }
 
 .country article .country-info div{
@@ -42,11 +46,7 @@
 
 .country article  div h3{
       font-weight:600;
-}
 
-.country article  .borders{
-   display:flex;
-   flex-wrap:wrap;
 }
 
 .country article  .borders ul{
@@ -64,6 +64,7 @@
    .country article .country-container{
     display:grid;
     grid-template-columns:repeat(2, 1fr);
+    gap:80px;
    }
 
 
@@ -74,12 +75,10 @@
    }
 
  .country article img{
-    width:500px;
-    
+    width:560px;
    } 
 
- 
-
+   
 
 }
 

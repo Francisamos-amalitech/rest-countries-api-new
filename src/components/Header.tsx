@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         <div>
           <h1>Where in the world?</h1>
         </div>
-        <div>
+        <div className="dark">
           {/* Conditional rendering based on darkMode state */}
           <i
             className={darkMode ? 'fas fa-sun' : 'fas fa-moon'}
