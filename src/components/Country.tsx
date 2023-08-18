@@ -31,23 +31,28 @@ const Country: React.FC = () => {
     const fetchCountryData = async () => {
       const response = await fetch(`https://restcountries.com/v2/name/${name}`);
       const countryData: CountryData[] = await response.json();
-      const countryInfo = countryData[0];
-      setCountry(countryInfo);
-
-      if (countryInfo) {
-        const borderCountryNames = await Promise.all(
-          countryInfo.borders.map(async (border) => {
-            const response = await fetch(
-              `https://restcountries.com/v2/alpha/${border}`
-            );
-            const borderData = await response.json();
-            return borderData.name;
-          })
-        );
-        setBorderNames(borderCountryNames);
+      
+      if (countryData.length > 0) {
+        const countryInfo = countryData[0];
+        setCountry(countryInfo);
+  
+        if (countryInfo.borders.length > 0) {
+          const borderCountryNames = await Promise.all(
+            countryInfo.borders.map(async (border) => {
+              const response = await fetch(
+                `https://restcountries.com/v2/alpha/${border}`
+              );
+              const borderData = await response.json();
+              return borderData.name;
+            })
+          );
+          setBorderNames(borderCountryNames);
+        }
+      } else {
+        setCountry(null); 
       }
     };
-
+  
     fetchCountryData();
   }, [name]);
 
@@ -85,7 +90,7 @@ const Country: React.FC = () => {
               <img src={flag} alt={countryName} />
             </div>
             <div className="country-info">
-              <div>
+              <div className="flex">
                 <h2 className="country-name">{name}</h2>
                 <h5>
                   Native Name: <span>{nativeName}</span>
@@ -104,7 +109,7 @@ const Country: React.FC = () => {
                 </h5>
               </div>
 
-              <div>
+              <div className="flex">
                 <h5>
                   Top Level Domain: <span>{topLevelDomain.join(", ")}</span>{" "}
                 </h5>
@@ -115,10 +120,33 @@ const Country: React.FC = () => {
                   Languages: <span>{languages[0]?.name}</span>
                 </h5>
               </div>
+              {/* <div className="container">
+                <h5>Border </h5> &nbsp; <span>Countries:</span>
+                <div className="borders">
+                  {borderNames.map((borderName) => (
+                    <ul key={borderName}>
+                      <li>{borderName}</li>
+                    </ul>
+                  ))}
+                </div>
+              </div> */}
+             <div className="container">
+  {borderNames.length > 0 ? (
+    <>
+      <h5>Border </h5> &nbsp; <span>Countries:</span>
+      <div className="borders">
+        {borderNames.slice(0, 4).map((borderName) => (
+          <ul key={borderName}>
+            <li>{borderName}</li>
+          </ul>
+        ))}
+      </div>
+    </>
+  ) : (
+    <p>No border countries</p>
+  )}
+</div>
 
-              <h3>Border Countries:</h3>
-
-          
             </div>
           </div>
         </article>

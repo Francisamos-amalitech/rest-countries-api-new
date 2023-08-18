@@ -9,103 +9,131 @@
   }
 
 
-.country{
-    padding:100px 0;
-}
 
-.btn-light{
+  .btn-light{
     width:120px;
+    background:var(--article-color);
+    color:#fff;
     padding:10px 0;
     margin-bottom:30px;
     display:inline-block;
 }
+
+
+.light-theme .btn-light{
+    background:#fff;
+    color:#000;
+    border:1px solid #efeded;
+}
+
+
+.country{
+    padding:50px 5%;
+}
+
 
 .fa-arrow-left{
     margin-right:5px;
 }
 
 .country article .country-info div{
-    margin:30px 0;
+    margin:20px 0;
 }
 
 .country article .country-info div h2{
-    font-size:30px;
+    font-size:32px;
     letter-spacing:1px;
+    font-weight:900;
 }
 
 .country article .country-info div h5{
     font-weight:600;
     margin:10px 0;
-    font-size:18px;
+    font-size:14px;
 }
 
 .country article .country-info div h5 span{
     font-weight: 300;
+    font-size:14px;
 }
 
 
-.country article  div h3{
-      font-weight:600;
 
+.country .borders ul{
+    list-style:none;
+    margin:10px 5px;
+    background-color:var(--article-color);
+    padding:5px 15px;
+    border-radius:3px;
+    display:flex;
+    align-items:center;
+    display:inline-block;
+    box-shadow:0 5px 20px (200, 15%, 8%, 0.5);
 }
 
-.country article  .borders ul{
-        list-style:none;
-        margin:10px;
-        background-color:var(--article-color);
-        padding:5px 15px;
-        border-radius:3px;
-        box-shadow:0 5px 20px (200, 15%, 8%, 0.5);
+.light-theme .country .borders ul{
+    background:#fff;
+    color:#000;
 }
 
+
+
+
+.container h5{
+    display:inline-block;
+}
 
 
 @media(min-width:992px){
-   .country article .country-container{
+
+    .country{
+        width:1220px;
+        padding:5% 5%;
+    }
+
+
+
+   .country .country-container{
     display:grid;
     grid-template-columns:repeat(2, 1fr);
-    gap:80px;
+    gap:50px;
    }
 
 
    .country .country-info{
     display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:20px;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+   
    }
 
- .country article img{
-    width:560px;
+ .flag img{
+    width:100%;
    } 
 
-   
+
+
+.borders{
+    display:flex;
+    align-items:center;
+}
+
+
+.container{
+    display:flex;
+    align-items:center;
+    margin-bottom:5%;
+}
+
+
+.country .borders li{
+   width:100%;
+   text-align: center;
 
 }
 
 
-@media(min-width:1200px){
-    .country{
-        max-width:1100px;
-        margin:auto;
-       
-    }
-
-}
-
-@media(min-width:1366px){
-    .country{
-        max-width:1200px;
-       
-    }
 }
 
 
-@media(min-width:1440px){
-    .country{
-        max-width:1400px;
-       
-        
-    }
-}
 
 
