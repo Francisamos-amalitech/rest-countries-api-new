@@ -1,4 +1,4 @@
-// Country.js
+
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCountryData } from "./CountryContext";
@@ -37,18 +37,18 @@ useEffect(() => {
 
     if (countryInfo.borders.length > 0) {
       const borderCountryNames = countryInfo.borders.map((border: string) => {
-        const borderCountry = countries.find((c: CountryData) => c.alpha3Code === border); // Use alpha3Code or the correct property for comparison
+        const borderCountry = countries.find((c: CountryData) => c.alpha3Code === border);
         console.log("Border country:", borderCountry);
-        return borderCountry ? borderCountry.name : ""; // Use a conditional (ternary) operator for safety
+        return borderCountry ? borderCountry.name : ""; 
       });
       console.log("Border names:", borderCountryNames);
       setBorderNames(borderCountryNames);
     } else {
-      setBorderNames([]); // Handle the case when there are no bordering countries
+      setBorderNames([]);
     }
   } else {
     setCountry(null);
-    setBorderNames([]); // Handle the case when the selected country is not found
+    setBorderNames([]);
   }
 }, [name, countries]);
 
