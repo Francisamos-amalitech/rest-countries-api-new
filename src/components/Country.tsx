@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+// Country.js
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useCountryData } from "./CountryContext";
 import "../country.css";
-import useCountryData from "./useCountryData";
 
 interface CountryData {
-  numericCode: string;
+ alpha3Code: string;
   flag: string;
   name: string;
   nativeName: string;
@@ -19,44 +20,40 @@ interface CountryData {
 }
 
 const Country: React.FC = () => {
-  const { countries, loading, error } = useCountryData(
-    "https://restcountries.com/v2/all"
-  );
+  const { countries } = useCountryData();
   const [country, setCountry] = useState<CountryData | null>(null);
   const [borderNames, setBorderNames] = useState<string[]>([]);
   const navigate = useNavigate();
   const { name } = useParams<{ name: string }>();
 
-  useEffect(() => {
-    const fetchCountryData = async () => {
-      const response = await fetch(`https://restcountries.com/v2/name/${name}`);
-      const countryData: CountryData[] = await response.json();
-      
-      if (countryData.length > 0) {
-        const countryInfo = countryData[0];
-        setCountry(countryInfo);
-  
-        if (countryInfo.borders.length > 0) {
-          const borderCountryNames = await Promise.all(
-            countryInfo.borders.map(async (border) => {
-              const response = await fetch(
-                `https://restcountries.com/v2/alpha/${border}`
-              );
-              const borderData = await response.json();
-              return borderData.name;
-            })
-          );
-          setBorderNames(borderCountryNames);
-        }
-      } else {
-        setCountry(null); 
-      }
-    };
-  
-    fetchCountryData();
-  }, [name]);
+useEffect(() => {
+  console.log("All countries:", countries);
 
-  // Handle back button click
+  const countryInfo = countries.find((c: CountryData) => c.name === name);
+  console.log("Selected country:", countryInfo);
+
+  if (countryInfo) {
+    setCountry(countryInfo);
+
+    if (countryInfo.borders.length > 0) {
+      const borderCountryNames = countryInfo.borders.map((border: string) => {
+        const borderCountry = countries.find((c: CountryData) => c.alpha3Code === border); // Use alpha3Code or the correct property for comparison
+        console.log("Border country:", borderCountry);
+        return borderCountry ? borderCountry.name : ""; // Use a conditional (ternary) operator for safety
+      });
+      console.log("Border names:", borderCountryNames);
+      setBorderNames(borderCountryNames);
+    } else {
+      setBorderNames([]); // Handle the case when there are no bordering countries
+    }
+  } else {
+    setCountry(null);
+    setBorderNames([]); // Handle the case when the selected country is not found
+  }
+}, [name, countries]);
+
+  
+
   const handleBackButtonClick = () => {
     navigate("/rest-countries-api-new");
   };
@@ -120,33 +117,23 @@ const Country: React.FC = () => {
                   Languages: <span>{languages[0]?.name}</span>
                 </h5>
               </div>
-              {/* <div className="container">
-                <h5>Border </h5> &nbsp; <span>Countries:</span>
-                <div className="borders">
-                  {borderNames.map((borderName) => (
-                    <ul key={borderName}>
-                      <li>{borderName}</li>
-                    </ul>
-                  ))}
-                </div>
-              </div> */}
-             <div className="container">
-  {borderNames.length > 0 ? (
-    <>
-      <h5>Border </h5> &nbsp; <span>Countries:</span>
-      <div className="borders">
-        {borderNames.slice(0, 4).map((borderName) => (
-          <ul key={borderName}>
-            <li>{borderName}</li>
-          </ul>
-        ))}
-      </div>
-    </>
-  ) : (
-    <p>No border countries</p>
-  )}
-</div>
 
+              <div className="container">
+              {borderNames.length > 0 ? (
+  <>
+    <h5>Border</h5> &nbsp; <span>Countries:</span>
+    <div className="borders">
+      {borderNames.slice(0, 4).map((borderName, index) => (
+        <ul key={index}>
+          <li>{borderName}</li>
+        </ul>
+      ))}
+    </div>
+  </>
+) : (
+  <p>No border countries</p>
+)}
+              </div>
             </div>
           </div>
         </article>

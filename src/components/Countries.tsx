@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import useCountryData from "./useCountryData";
 
 interface Country {
@@ -12,7 +12,9 @@ interface Country {
 }
 
 const Countries: React.FC = () => {
-  const { countries, loading, error } = useCountryData("https://restcountries.com/v2/all");
+  const { countries, loading, error } = useCountryData(
+    "https://restcountries.com/v2/all"
+  );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [regionFilter, setRegionFilter] = useState<string>("All");
 
@@ -25,8 +27,9 @@ const Countries: React.FC = () => {
   };
 
   const filteredCountries = countries.filter((country) => {
-    const nameMatch =
-      country.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const nameMatch = country.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     const regionMatch =
       regionFilter === "All" || country.region === regionFilter;
     return nameMatch && regionMatch;
@@ -40,24 +43,22 @@ const Countries: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
-
   return (
     <>
       <section className="filter">
         <form className="form-control">
-            <i
-              className="search-icon fas fa-search"
-              onClick={() => document.getElementById("search")?.focus()}
-            ></i>
-            <input
-              type="search"
-              name="search"
-              id="search"
-              placeholder="Search for a country..."
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-            />
-          
+          <i
+            className="search-icon fas fa-search"
+            onClick={() => document.getElementById("search")?.focus()}
+          ></i>
+          <input
+            type="search"
+            name="search"
+            id="search"
+            placeholder="Search for a country..."
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+          />
         </form>
         <div className="region-filter">
           <select
@@ -81,28 +82,27 @@ const Countries: React.FC = () => {
         {filteredCountries.map((country) => {
           const { numericCode, name, population, region, capital, flag } =
             country;
-          
+
           return (
             <Link to={`/countries/${name}`} key={numericCode}>
-          <article key={numericCode}>
-<div>
-  <img src={flag} alt={name} />
-  <div className="details">
-    <h3>{name}</h3>
-    <h4>
-      Population: <span>{population}</span>
-    </h4>
-    <h4>
-      Region: <span>{region}</span>
-    </h4>
-    <h4>
-      Capital: <span>{capital}</span>
-    </h4>
-  </div>
-</div>
-</article>
-          </Link>
-           
+              <article key={numericCode}>
+                <div>
+                  <img src={flag} alt={name} />
+                  <div className="details">
+                    <h3>{name}</h3>
+                    <h4>
+                      Population: <span>{population}</span>
+                    </h4>
+                    <h4>
+                      Region: <span>{region}</span>
+                    </h4>
+                    <h4>
+                      Capital: <span>{capital}</span>
+                    </h4>
+                  </div>
+                </div>
+              </article>
+            </Link>
           );
         })}
       </section>
@@ -111,5 +111,3 @@ const Countries: React.FC = () => {
 };
 
 export default Countries;
-
-
