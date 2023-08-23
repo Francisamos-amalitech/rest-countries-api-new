@@ -1,11 +1,10 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCountryData } from "./CountryContext";
 import "../country.css";
 
 interface CountryData {
- alpha3Code: string;
+  alpha3Code: string;
   flag: string;
   name: string;
   nativeName: string;
@@ -26,33 +25,30 @@ const Country: React.FC = () => {
   const navigate = useNavigate();
   const { name } = useParams<{ name: string }>();
 
-useEffect(() => {
-  console.log("All countries:", countries);
+  useEffect(() => {
+    const countryInfo = countries.find((c: CountryData) => c.name === name);
 
-  const countryInfo = countries.find((c: CountryData) => c.name === name);
-  console.log("Selected country:", countryInfo);
+    if (countryInfo) {
+      setCountry(countryInfo);
 
-  if (countryInfo) {
-    setCountry(countryInfo);
-
-    if (countryInfo.borders.length > 0) {
-      const borderCountryNames = countryInfo.borders.map((border: string) => {
-        const borderCountry = countries.find((c: CountryData) => c.alpha3Code === border);
-        console.log("Border country:", borderCountry);
-        return borderCountry ? borderCountry.name : ""; 
-      });
-      console.log("Border names:", borderCountryNames);
-      setBorderNames(borderCountryNames);
+      if (countryInfo.borders && countryInfo.borders.length > 0) {
+        const borderCountryNames = countryInfo.borders
+          .map((border: string) => {
+            const borderCountry = countries.find(
+              (c: CountryData) => c.alpha3Code === border
+            );
+            return borderCountry ? borderCountry.name : "";
+          })
+          .filter(Boolean); 
+        setBorderNames(borderCountryNames);
+      } else {
+        setBorderNames([]);
+      }
     } else {
+      setCountry(null);
       setBorderNames([]);
     }
-  } else {
-    setCountry(null);
-    setBorderNames([]);
-  }
-}, [name, countries]);
-
-  
+  }, [name, countries]);
 
   const handleBackButtonClick = () => {
     navigate("/rest-countries-api-new");
@@ -108,7 +104,8 @@ useEffect(() => {
 
               <div className="flex">
                 <h5>
-                  Top Level Domain: <span>{topLevelDomain.join(", ")}</span>{" "}
+                  Top Level Domain:{" "}
+                  <span>{topLevelDomain.join(", ")}</span>{" "}
                 </h5>
                 <h5>
                   Currencies: <span>{currencies[0]?.name}</span>
@@ -119,20 +116,20 @@ useEffect(() => {
               </div>
 
               <div className="container">
-              {borderNames.length > 0 ? (
-  <>
-    <h5>Border</h5> &nbsp; <span>Countries:</span>
-    <div className="borders">
-      {borderNames.slice(0, 4).map((borderName, index) => (
-        <ul key={index}>
-          <li>{borderName}</li>
-        </ul>
-      ))}
-    </div>
-  </>
-) : (
-  <p>No border countries</p>
-)}
+                {borderNames.length > 0 ? (
+                  <>
+                    <h5>Border Countries:</h5>
+                    <div className="borders">
+                      {borderNames.slice(0, 4).map((borderName, index) => (
+                        <ul key={index}>
+                          {borderName}
+                        </ul>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <p>No border countries</p>
+                )}
               </div>
             </div>
           </div>
